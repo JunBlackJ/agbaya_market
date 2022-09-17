@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load static %}
+    <div class="home">
+        <div class="container-fluid">
+            <div class="cover">
+                <img src="{% static 'img/virender-singh-hE0nmTffKtM-unsplash.jpg' %}" >
+                <div class="cover-text">
+                    <h1>Agbaya market</h1>
+                    <h2>every thing that's new and now</h2>
+                    <a href="{% url 'shop:product_list' %}">shop now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="container">
+            <h1>who we are</h1>
+            <p>
+                
+               <strong>Agbaya Shop</strong> est une entreprise de commerce en ligne Ivoirienne basée à Dabou. Créée par Agbaya Ambroise et developpée par Agbaya Roland Junior en Octobre 2022, l'entreprise a été introduite en Bourse au marketplace en septembre 2022.
+
+            L'activité initiale de la société Amazon concernait la vente à distance de poisson, avant que la société ne se diversifie dans la vente de produits culturels, puis marchands. Aujourd'hui, certains produits alimentaires peuvent aussi être commandés via Agbaya shop.
+            
+            </p>
+        </div>
+    </section>
+{% endblock body %}

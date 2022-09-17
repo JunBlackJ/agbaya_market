@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <section>
+        <div class="container">
+            {% if profile.image %}
+                <div class="profile-image-container">
+                    <div class="profile-image">
+                        <img src="{{profile.image.url}}" class="profile-image">
+                    </div>
+                </div>
+            {% else %}
+                <div class="profile-image-container">
+                    <div class="profile-image">
+                        <img src="{% static 'img/default-user-image.png' %}" class="profile-image">
+                    </div>
+                </div>
+            {% endif %}
+            <h1 class="text-center">{{profile.user}}</h1>
+            {% if profile.shop %}
+                <h2 class="text-center">the owner of <span class="shop-name">{{profile.shop}}</span></h2>
+            {% endif %}
+        </div>
+    </section>
+    {% if request.user == profile.user %}
+        <section>
+            <div class="container">
+                <h2 class="text-center">user settings</h2>
+                <div class="btn-container">
+                    <a class="profile-btn" href="{% url 'accounts:update_profile' profile.pk %}">change my info</a>
+                    <a class="profile-btn delete" href="{% url 'accounts:delete_user' profile.pk %}">delete account</a>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+{% endblock body %}

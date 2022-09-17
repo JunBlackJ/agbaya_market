@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load static %}
+<div class="home">
+    <div class="container-fluid">
+        <div class="cover">
+            <img src="{% static 'img/virender-singh-hE0nmTffKtM-unsplash.jpg' %}" >
+            <div class="cover-text">
+                <h1>Agbaya Market</h1>
+                <h2>Poissonnerie Moderne</h2>
+                <a href="{% url 'shop:product_list' %}">shop now</a>
+            </div>
+        </div>
+    </div>
+    <section>
+        <div class="container-fluid">
+            <div class="categories">
+                {% for category in categories %}
+                    <div class="category">
+                        <a href="{% url 'shop:category_detail' category.slug %}">
+                            <div class="category-heading">
+                                <h2 class="text-center">{{ category }}</h2>
+                            </div>
+                            <div class="category-img">
+                                <img src="{{ category.image.url }}">
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <h1 class="text-center main-heading">new on Agbaya</h1>
+            <div class="products">
+                {% for product in products %}
+                    <a href="{% url 'shop:product_detail' product.slug %}" class="product">
+                        <div class="product-main">
+                            <img src="{{ product.image.url }}">
+                            <div class="product-features">
+                                {% if product.discount %}
+                                    <span class="text-center sale">sale !</span>
+                                {% endif %}
+                                {% if product.is_BestSeller == True %}
+                                    <span class="text-center bestseller">bestseller</span>
+                                {% endif %}
+                                {% if product.is_featured == True %}
+                                    <span class="text-center featured">featured</span>
+                                {% endif %}
+                                {% if product.is_valid == False %}
+                                    <span class="text-center soldout">sold out</span>
+                                {% endif %}
+                                {% if product.is_on_Sale == True %}
+                                    <span class="text-center featured">on sale</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="product-info">
+                          <div class="product-heading">
+                              <h2 class="text-center">{{ product }}</h2>
+                          </div>
+                          <div class="product-price">
+                              {{ product.get_price }} FCFA
+                              {% if product.discount %}
+                                 <span class="discount"><del>{{ product.price }} FCFA</del><span>
+                              {% endif %}
+                          </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="view-all">
+                <a href="{% url 'shop:product_list' %}">view all products</a>
+            </div>
+        </div>
+    </section>
+   
+    <div class="categories">
+        {% for partenaire in partenaire_list %}
+            <div class="category">
+                <a href="{% url 'shop:partenaire_detail' patenaire.slug %}">
+                    <div class="category-heading">
+                        <h2 class="text-center">{{ partenaire }}</h2>
+                    </div>
+                    <div class="category-img">
+                        <img src="{{ partenaire.image.url }}" loading="lazy">
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    
+    
+    
+</div>
+{% endblock body %}

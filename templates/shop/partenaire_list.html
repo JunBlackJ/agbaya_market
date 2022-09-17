@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block body %}
+    <section>
+        <div class="container">
+            {% if request.user.is_staff %}
+                <a class="add" href="{% url 'shop:partenaire_create' %}">
+                    <i class="fa fa-plus fa-fw"></i> add partners
+                </a>
+            {% endif %}
+            <h1 class="main-heading text-center">partner list</h1>
+            <div class="categories">
+                {% for partenaire in partenaire_list %}
+                    <div class="category">
+                        <a href="{% url 'shop:partenaire_detail' patenaire.slug %}">
+                            <div class="category-heading">
+                                <h2 class="text-center">{{ partenaire }}</h2>
+                            </div>
+                            <div class="category-img">
+                                <img src="{{ partenaire.image.url }}" loading="lazy">
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock body %}
